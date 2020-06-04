@@ -1,7 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.Azure.Cosmos.Table;
+using Microsoft.Extensions.Logging;
 using System;
-
 
 namespace AzureStorageTableCoreLogger
 {
