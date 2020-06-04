@@ -1,5 +1,8 @@
 ﻿# :page_facing_up: AzureStorageTableCoreLogger
 
+[![Build Status](https://kiyotakehosomi.visualstudio.com/AzureStorageTableCoreLogger/_apis/build/status/hosomi.AzureStorageTableCoreLogger?branchName=master)](https://kiyotakehosomi.visualstudio.com/AzureStorageTableCoreLogger/_build/latest?definitionId=6&branchName=master)  
+　  
+
 Microsoft.Extensions.Logging のインターフェイスを実装して AzureStorageTable へログを出力します。  
 
 ## Usage:
