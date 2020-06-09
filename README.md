@@ -27,7 +27,7 @@ catch (Exception e)
 
 ---
 
-## :bookmark:
+## :books: リファレンス
 
 :link: [Logger<T> クラス (Microsoft.Extensions.Logging) | Microsoft Docs](https://docs.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.logging.logger-1?view=dotnet-plat-ext-3.1&viewFallbackFrom=netcore-3.1)  
 :link: [Azure Storage Explorer – クラウド ストレージ管理 | Microsoft Azure](https://azure.microsoft.com/ja-jp/features/storage-explorer/)  
