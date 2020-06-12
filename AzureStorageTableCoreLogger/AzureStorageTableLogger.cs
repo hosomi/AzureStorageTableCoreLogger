@@ -53,11 +53,18 @@ namespace AzureStorageTableCoreLogger
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
+
+            var log4LogLevel = ConvertLogLevel(logLevel);
+            if (!IsEnabled(log4LogLevel))
+            {
+                return;
+            }
+
             var logEntity = new AzureStorageTableEntity
             {
                 PartitionKey = this.partitionKey,
                 RowKey = Guid.NewGuid().ToString(),
-                LogLevel = Enum.ToObject(typeof(Log4LogLevel), (int)logLevel).ToString(),
+                LogLevel = log4LogLevel.ToString(),
                 Message = formatter(state, exception),
             };
 
@@ -67,7 +74,42 @@ namespace AzureStorageTableCoreLogger
 
         public bool IsEnabled(LogLevel logLevel)
         {
+            //var convertLogLevel = ConvertLogLevel(logLevel);
+            //return IsEnabled(convertLogLevel);
             return true;
+        }
+
+        private bool IsEnabled(Log4LogLevel logLevel)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Convert log level to Log4 variant.
+        /// </summary>
+        /// <param name="logLevel">level to be converted.</param>
+        /// <returns></returns>
+        private static Log4LogLevel ConvertLogLevel(LogLevel logLevel)
+        {
+            switch (logLevel)
+            {
+                case Microsoft.Extensions.Logging.LogLevel.Trace:
+                    return Log4LogLevel.TRACE;
+                case Microsoft.Extensions.Logging.LogLevel.Debug:
+                    return Log4LogLevel.DEBUG;
+                case Microsoft.Extensions.Logging.LogLevel.Information:
+                    return Log4LogLevel.INFO;
+                case Microsoft.Extensions.Logging.LogLevel.Warning:
+                    return Log4LogLevel.WARN;
+                case Microsoft.Extensions.Logging.LogLevel.Error:
+                    return Log4LogLevel.ERROR;
+                case Microsoft.Extensions.Logging.LogLevel.Critical:
+                    return Log4LogLevel.FATAL;
+                case Microsoft.Extensions.Logging.LogLevel.None:
+                    return Log4LogLevel.NONE;
+                default:
+                    return Log4LogLevel.DEBUG;
+            }
         }
 
         public IDisposable BeginScope<TState>(TState state)
