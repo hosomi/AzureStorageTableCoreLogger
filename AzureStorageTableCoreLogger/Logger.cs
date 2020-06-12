@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Azure.Cosmos.Table;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Text;
 
@@ -17,11 +18,20 @@ namespace AzureStorageTableCoreLogger
         /// </summary>
         /// <param name="storageConnectionString">ストレージアカウントの接続文字列。</param>
         /// <param name="storageTableName">ストレージテーブルのテーブル名。</param>
-        /// <param name="venreyId">対象アカウント（ストレージテーブルの PartitionKey になる値）。</param>
-        /// <param name="baseSeq">オプション：対象 BaseSeq （ストレージテーブルの PartitionKey になる値、キーは venreyId-BaseSeq になります）。</param>
+        /// <param name="partiotionKey">ストレージテーブルの PartitionKey になる値。</param>
         public Logger(string storageConnectionString, string storageTableName, string partiotionKey)
         {
             SetInstanceAzureStorageTableLogger(storageConnectionString, storageTableName, partiotionKey);
+        }
+
+        /// <summary>
+        /// ロガーインスタンスを生成。
+        /// </summary>
+        /// <param name="cloudTableLogging">ログの書き込み先。</param>
+        /// <param name="partiotionKey">ストレージテーブルの PartitionKey になる値。</param>
+        public Logger(CloudTable cloudTableLogging, string partiotionKey)
+        {
+            SetInstanceAzureStorageTableLogger(cloudTableLogging, partiotionKey);
         }
 
         /// <summary>
@@ -177,13 +187,31 @@ namespace AzureStorageTableCoreLogger
         /// </summary>
         /// <param name="storageConnectionString">ストレージアカウントの接続文字列。</param>
         /// <param name="storageTableName">ストレージテーブルのテーブル名。</param>
-        /// <param name="venreyId">対象アカウント（ストレージテーブルの PartitionKey になる値）。</param>
-        /// <param name="baseSeq">オプション：対象 BaseSeq （ストレージテーブルの PartitionKey になる値、キーは venreyId-BaseSeq になります）。</param>
+        /// <param name="partiotionKey">ストレージテーブルの PartitionKey になる値。</param>
         private void SetInstanceAzureStorageTableLogger(string storageConnectionString, string storageTableName, string partiotionKey)
         {
             try
             {
                 this.Log = new AzureStorageTableLogger(storageConnectionString, storageTableName, partiotionKey);
+            }
+            catch (Exception e)
+            {
+                this.Log = null;
+                this.exception = e;
+                Console.WriteLine(ToString(e));
+            }
+        }
+
+        /// <summary>
+        /// インスタンスを生成します。
+        /// </summary>
+        /// <param name="cloudTableLogging">ログの書き込み先。</param>
+        /// <param name="partiotionKey">ストレージテーブルの PartitionKey になる値。</param>
+        private void SetInstanceAzureStorageTableLogger(CloudTable cloudTableLogging, string partitionKey)
+        {
+            try
+            {
+                this.Log = new AzureStorageTableLogger(cloudTableLogging, partitionKey);
             }
             catch (Exception e)
             {
