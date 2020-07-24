@@ -25,6 +25,10 @@ catch (Exception e)
 }
 ```
 
+### Usage results:
+
+![Usage results](usage-results.png)  
+
 ---
 
 ## :books: リファレンス
