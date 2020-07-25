@@ -2,8 +2,8 @@
 
 [![Build Status](https://kiyotakehosomi.visualstudio.com/AzureStorageTableCoreLogger/_apis/build/status/hosomi.AzureStorageTableCoreLogger?branchName=master)](https://kiyotakehosomi.visualstudio.com/AzureStorageTableCoreLogger/_build/latest?definitionId=6&branchName=master)  
 　  
-
-Microsoft.Extensions.Logging のインターフェイスを実装して AzureStorageTable へログを出力します。  
+Implement the interface of Microsoft.Extensions.Logging to output logs to AzureStorageTable.  
+（Microsoft.Extensions.Logging のインターフェイスを実装して AzureStorageTable へログを出力します。）  
 
 ## Usage:
 
@@ -28,6 +28,13 @@ catch (Exception e)
 ### Usage results:
 
 ![Usage results](usage-results.png)  
+
+
+
+## Install
+
+:link: [NuGet Gallery | AzureStorageTableCoreLogger](https://www.nuget.org/packages/AzureStorageTableCoreLogger/)
+
 
 ---
 
