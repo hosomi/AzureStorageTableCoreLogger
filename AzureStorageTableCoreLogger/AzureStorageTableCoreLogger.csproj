@@ -7,7 +7,8 @@
     <Version>0.0.1.1</Version>
     <Authors>hosomi</Authors>
     <Company>hosomi</Company>
-    <PackageDescription>Microsoft.Extensions.Logging -&gt; AzureStrageTable</PackageDescription>
+    <PackageDescription>Implement the interface of Microsoft.Extensions.Logging to output logs to AzureStorageTable.
+（Microsoft.Extensions.Logging のインターフェイスを実装して AzureStorageTable へログを出力します。）</PackageDescription>
     <RepositoryUrl>https://github.com/hosomi/AzureStorageTableCoreLogger.git</RepositoryUrl>
     <AssemblyVersion>0.0.1.1</AssemblyVersion>
     <FileVersion>0.0.1.1</FileVersion>
