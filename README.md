@@ -7,21 +7,32 @@ Implement the interface of Microsoft.Extensions.Logging to output logs to AzureS
 
 ## Usage:
 
-```csharp
-Logger log = new Logger("UseDevelopmentStorage=true", "TestTable", "TestKey");
+``using AzureStorageTableCoreLogger;``:  
 
-log.Debug("DEBUG");
-log.Info("INFO");
-try
+```csharp
+using AzureStorageTableCoreLogger;
+using System;
+
+class Program
 {
-    int a = 0;
-    int b = 0;
-    int c = a / b;
-}
-catch (Exception e)
-{
-    log.Error(e, "ERROR");
-    log.Error(e);
+    static void Main(string[] args)
+    {
+        Logger log = new Logger("UseDevelopmentStorage=true", "TestTable", "TestKey");
+
+        log.Debug("DEBUG");
+        log.Info("INFO");
+        try
+        {
+            int a = 0;
+            int b = 0;
+            int c = a / b;
+        }
+        catch (Exception e)
+        {
+            log.Error(e, "ERROR");
+            log.Error(e);
+        }
+    }
 }
 ```
 
@@ -33,7 +44,20 @@ catch (Exception e)
 
 ## Install
 
-:link: [NuGet Gallery | AzureStorageTableCoreLogger](https://www.nuget.org/packages/AzureStorageTableCoreLogger/)
+:link: [NuGet Gallery | AzureStorageTableCoreLogger](https://www.nuget.org/packages/AzureStorageTableCoreLogger/)  
+
+　  
+
+or
+
+　  
+``dotnet add PROJECT package AzureStorageTableCoreLogger --version [version]``: 
+
+example: 
+
+```bash
+dotnet add PROJECT package AzureStorageTableCoreLogger --version 0.0.1.1
+```
 
 
 ---
