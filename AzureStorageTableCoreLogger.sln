@@ -3,14 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureStorageTableCoreLogger", "AzureStorageTableCoreLogger\AzureStorageTableCoreLogger.csproj", "{F3F4C509-83E4-44C4-8364-15B1F84BCE52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureStorageTableCoreLogger", "AzureStorageTableCoreLogger\AzureStorageTableCoreLogger.csproj", "{F3F4C509-83E4-44C4-8364-15B1F84BCE52}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9CA484F5-7763-439E-9EE6-3595F2877CCE}"
 	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureStorageTableCoreLogger.Tests", "AzureStorageTableCoreLogger.Tests\AzureStorageTableCoreLogger.Tests.csproj", "{C901701D-3A8C-49BF-AD95-5A9FA7E19812}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureStorageTableCoreLogger.Tests", "AzureStorageTableCoreLogger.Tests\AzureStorageTableCoreLogger.Tests.csproj", "{C901701D-3A8C-49BF-AD95-5A9FA7E19812}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
