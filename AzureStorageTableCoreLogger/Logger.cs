@@ -61,6 +61,19 @@ namespace AzureStorageTableCoreLogger
         }
 
         /// <summary>
+        /// 警告出力。
+        /// </summary>
+        /// <param name="message">出力内容。</param>
+        public void Warn(string message)
+        {
+            if (Log == null)
+            {
+                return;
+            }
+            Log.LogWarning(message);
+        }
+
+        /// <summary>
         /// エラー出力。
         /// </summary>
         /// <param name="message">出力内容。</param>
