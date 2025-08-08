@@ -1,4 +1,4 @@
-﻿using Microsoft.Azure.Cosmos.Table;
+using Azure.Data.Tables;
 using Microsoft.Extensions.Logging;
 using System;
 
@@ -10,12 +10,12 @@ namespace AzureStorageTableCoreLogger
     public class AzureStorageTableLogger : ILogger
     {
         /// <summary>
-        /// <seealso cref="CloudTable"/>
+        /// <seealso cref="TableClient"/>
         /// </summary>
-        private readonly CloudTable cloudTableLogging;
+        private readonly TableClient cloudTableLogging;
 
         /// <summary>
-        /// <see cref="TableEntity.PartitionKey"/>
+        /// <see cref="ITableEntity.PartitionKey"/>
         /// </summary>
         private readonly string partitionKey;
 
@@ -30,7 +30,7 @@ namespace AzureStorageTableCoreLogger
         /// </summary>
         /// <param name="cloudTableLogging">ログの書き込み先</param>
         /// <param name="partitionKey"></param>
-        public AzureStorageTableLogger(CloudTable cloudTableLogging, string partitionKey)
+        public AzureStorageTableLogger(TableClient cloudTableLogging, string partitionKey)
         {
             this.partitionKey = partitionKey;
             this.cloudTableLogging = cloudTableLogging;
@@ -41,14 +41,12 @@ namespace AzureStorageTableCoreLogger
         /// </summary>
         /// <param name="storageConnectionString">ストレージアカウントの接続文字列。</param>
         /// <param name="storageTableName">ストレージテーブルのテーブル名。</param>
-        /// <param name="partitionKey"><see cref="TableEntity.PartitionKey"/></param>
+        /// <param name="partitionKey"><see cref="ITableEntity.PartitionKey"/></param>
         public AzureStorageTableLogger(string storageConnectionString, string storageTableName, string partitionKey)
         {
             this.partitionKey = partitionKey;
-            var storageAccount = ConfigrationUtil.GetCloudStorageAccount(storageConnectionString);
-            var cloudTableClient = storageAccount.CreateCloudTableClient();
-            cloudTableLogging = cloudTableClient.GetTableReference(storageTableName);
-            cloudTableLogging.CreateIfNotExistsAsync().Wait();
+            cloudTableLogging = new TableClient(storageConnectionString, storageTableName);
+            cloudTableLogging.CreateIfNotExists();
         }
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
@@ -68,8 +66,7 @@ namespace AzureStorageTableCoreLogger
                 Message = formatter(state, exception),
             };
 
-            TableOperation toInsert = TableOperation.Insert(logEntity);
-            cloudTableLogging.ExecuteAsync(toInsert).GetAwaiter().GetResult();
+            cloudTableLogging.AddEntityAsync(logEntity).GetAwaiter().GetResult();
         }
 
         public bool IsEnabled(LogLevel logLevel)

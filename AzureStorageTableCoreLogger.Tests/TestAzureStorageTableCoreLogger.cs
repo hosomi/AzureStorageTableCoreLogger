@@ -1,4 +1,4 @@
-﻿using Microsoft.Azure.Cosmos.Table;
+using Azure.Data.Tables;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -27,14 +27,13 @@ namespace AzureStorageTableCoreLogger.Tests
             }
         }
 
+        [TestMethod]
         public void TestInstanceCloudTableLogging()
         {
-            var storageAccount = ConfigrationUtil.GetCloudStorageAccount("UseDevelopmentStorage=true");
-            var cloudTableClient = storageAccount.CreateCloudTableClient();
-            var cloudTableLogging = cloudTableClient.GetTableReference("TestTable");
-            cloudTableLogging.CreateIfNotExistsAsync().Wait();
+            var tableClient = new TableClient("UseDevelopmentStorage=true", "TestTable");
+            tableClient.CreateIfNotExists();
 
-            Logger log = new Logger(cloudTableLogging, "TestKey");
+            Logger log = new Logger(tableClient, "TestKey");
 
             log.Debug("TestInstanceCloudTableLogging-DEBUG");
             log.Info("TestInstanceCloudTableLogging-INFO");

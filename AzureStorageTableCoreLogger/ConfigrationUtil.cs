@@ -1,4 +1,3 @@
-﻿using Microsoft.Azure.Cosmos.Table;
 using Microsoft.Extensions.Configuration;
 using System;
 
@@ -21,17 +20,5 @@ namespace AzureStorageTableCoreLogger
             var config = new ConfigurationBuilder().AddJsonFile(jsonFile, true).AddEnvironmentVariables();
             return config?.Build();
         }
-
-
-        /// <summary>
-        /// ストレージアカウントへの参照を取得する。
-        /// </summary>
-        /// <param name="storageConnectionString">未指定はエミュレータへの接続、ローカルテスト用。</param>
-        /// <returns>ストレージアカウントの参照。</returns>
-        public static CloudStorageAccount GetCloudStorageAccount(string storageConnectionString = "UseDevelopmentStorage=true")
-        {
-            return CloudStorageAccount.Parse(storageConnectionString);
-        }
     }
-
 }
