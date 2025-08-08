@@ -1,4 +1,4 @@
-﻿using Microsoft.Azure.Cosmos.Table;
+using Azure.Data.Tables;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Text;
@@ -29,7 +29,7 @@ namespace AzureStorageTableCoreLogger
         /// </summary>
         /// <param name="cloudTableLogging">ログの書き込み先。</param>
         /// <param name="partiotionKey">ストレージテーブルの PartitionKey になる値。</param>
-        public Logger(CloudTable cloudTableLogging, string partiotionKey)
+        public Logger(TableClient cloudTableLogging, string partiotionKey)
         {
             SetInstanceAzureStorageTableLogger(cloudTableLogging, partiotionKey);
         }
@@ -220,7 +220,7 @@ namespace AzureStorageTableCoreLogger
         /// </summary>
         /// <param name="cloudTableLogging">ログの書き込み先。</param>
         /// <param name="partiotionKey">ストレージテーブルの PartitionKey になる値。</param>
-        private void SetInstanceAzureStorageTableLogger(CloudTable cloudTableLogging, string partitionKey)
+        private void SetInstanceAzureStorageTableLogger(TableClient cloudTableLogging, string partitionKey)
         {
             try
             {
